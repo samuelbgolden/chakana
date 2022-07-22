@@ -41,6 +41,8 @@ Not an exhaustive list; to serve as a development guide / design doc
 - [x] object collision system
 - [ ] environment
   - [x] solid unmoving flat ground
+- [ ] development tools
+  - [ ] add an in-game toggle for the debug view
 
 ## Credits
 

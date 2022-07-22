@@ -2,12 +2,14 @@ mod components;
 mod environment;
 mod player;
 mod player_input;
+mod sprites;
 
 mod prelude {
     pub use crate::components::*;
     pub use crate::environment::*;
     pub use crate::player::*;
     pub use crate::player_input::*;
+    pub use crate::sprites::*;
     pub use bevy::prelude::*;
     pub use bevy_rapier2d::prelude::*;
 }
@@ -27,8 +29,9 @@ impl Plugin for GamePlugin {
         app.add_startup_system(setup)
             .add_startup_system(spawn_player)
             .add_startup_system(build_environment)
-            .insert_resource(InputPollTimer(Timer::from_seconds(0.1, true)))
-            .add_system(handle_player_input);
+            .insert_resource(InputPollTimer(Timer::from_seconds(0.01, true)))
+            .add_system(handle_player_input)
+            .add_system(handle_sprite_playback);
     }
 }
 
