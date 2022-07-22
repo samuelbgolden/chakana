@@ -31,15 +31,18 @@ Not an exhaustive list; to serve as a development guide / design doc
   - [ ] base form
     - [ ] movement
       - [x] walk to the sides
-      - [ ] jump
+      - [x] jump
       - [x] momentum and velocity so its smoother
         - [ ] cap velocity at max
 - [x] object collision system
 - [ ] environment
-  - [ ] solid unmoving flat ground
+  - [x] solid unmoving flat ground
 
 ## Credits
 
 - Placeholder sprites:
+
   - [rogue from Calciumtrice](https://opengameart.org/content/animated-rogue)
   - [minimal mountainous platforms/trees](https://opengameart.org/content/minimal-2d-platformer-art-with-customisable-tress)
+
+- Lot's of game organization inspiration from Herbert Wolverson's book [Hands-On Rust](https://hands-on-rust.com/about/)
