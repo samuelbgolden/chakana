@@ -29,7 +29,8 @@ Not an exhaustive list; to serve as a development guide / design doc
 - [ ] player
   - [ ] base form
     - [ ] movement
-      - [ ] walk to the sides
+      - [x] walk to the sides
       - [ ] jump
+      - [ ] momentum and velocity so its smoother
 - [ ] environment
   - [ ] solid unmoving flat ground
