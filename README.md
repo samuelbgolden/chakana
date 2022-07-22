@@ -32,6 +32,7 @@ Not an exhaustive list; to serve as a development guide / design doc
       - [x] walk to the sides
       - [ ] jump
       - [ ] momentum and velocity so its smoother
+        - [ ] cap velocity at max
 - [ ] object collision system
 - [ ] environment
   - [ ] solid unmoving flat ground
