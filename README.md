@@ -27,13 +27,17 @@ A video game inspired by elements Quechua/Inca culture.
 Not an exhaustive list; to serve as a development guide / design doc
 
 - [ ] player
-  - [ ] switch player physics on ground vs off ground
   - [ ] base form
     - [ ] movement
+      - [ ] refactor to work based on messages
       - [x] walk to the sides
       - [x] jump
       - [x] momentum and velocity so its smoother
         - [ ] cap velocity at max
+  - [x] create a player state which is accessible by multiple systems
+  - [ ] player_input system should create a message of intent based on inputs
+    - [ ] buffered input system, intents carry a time-to-live and apply once the character is in an appropriate state
+- [ ] global sprite sheet based animation system
 - [x] object collision system
 - [ ] environment
   - [x] solid unmoving flat ground

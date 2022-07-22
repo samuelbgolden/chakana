@@ -1,7 +1,7 @@
 pub use crate::prelude::*;
 
-const APPLIED_VEL: f32 = 100.0;
-const JUMP_VEL: f32 = 125.0;
+const APPLIED_VEL: f32 = 300.0;
+const JUMP_VEL: f32 = 235.0;
 
 pub struct InputPollTimer(pub Timer);
 
@@ -19,7 +19,7 @@ pub fn handle_player_input(
         for key in keyb_in.get_pressed() {
             match key {
                 KeyCode::W | KeyCode::Space => {
-                    if (new_y_vel - 0.0).abs() < 0.01 {
+                    if (new_y_vel - 0.0).abs() < 0.1 {
                         new_y_vel = JUMP_VEL;
                     }
                 }
