@@ -5,6 +5,7 @@ mod prelude {
     pub use crate::components::*;
     pub use crate::player_input::*;
     pub use bevy::prelude::*;
+    pub use bevy_rapier2d::prelude::*;
 }
 
 use prelude::*;
