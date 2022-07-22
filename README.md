@@ -34,3 +34,7 @@ Not an exhaustive list; to serve as a development guide / design doc
       - [ ] momentum and velocity so its smoother
 - [ ] environment
   - [ ] solid unmoving flat ground
+
+## Credits
+
+- [Temporarily using sprites from Calciumtrice for testing](https://opengameart.org/content/animated-rogue)
