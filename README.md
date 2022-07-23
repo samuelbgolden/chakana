@@ -38,6 +38,8 @@ Not an exhaustive list; to serve as a development guide / design doc
   - [ ] player_input system should create a message of intent based on inputs
     - [ ] buffered input system, intents carry a time-to-live and apply once the character is in an appropriate state
 - [ ] global sprite sheet based animation system
+  - [ ] add data file with details about each sprite sheet to be read
+  - [x] create object for managing sprite ranges in texture atlases
 - [x] object collision system
 - [ ] environment
   - [x] solid unmoving flat ground

@@ -12,6 +12,7 @@ mod prelude {
     pub use crate::sprites::*;
     pub use bevy::prelude::*;
     pub use bevy_rapier2d::prelude::*;
+    pub use std::collections::HashMap;
 }
 
 #[allow(unused_imports)]

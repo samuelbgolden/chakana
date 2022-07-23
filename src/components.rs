@@ -7,3 +7,10 @@ pub struct Player {
 
 #[derive(Component, Deref, DerefMut)]
 pub struct SpritePlaybackTimer(pub Timer);
+
+#[derive(Component, Debug)]
+pub struct SpriteSheetRanges {
+    pub curr_sprite: usize,
+    pub curr_range: usize,
+    pub ranges: Vec<(usize, usize)>,
+}

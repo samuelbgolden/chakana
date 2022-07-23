@@ -12,11 +12,21 @@ pub enum PlayerState {
 pub fn spawn_player(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
-    mut texture_atlases: ResMut<Assets<TextureAtlas>>,
+    texture_atlases: ResMut<Assets<TextureAtlas>>,
 ) {
-    let texture_handle = asset_server.load("rogue_spritesheet_calciumtrice.png");
-    let texture_atlas = TextureAtlas::from_grid(texture_handle, Vec2::new(32.0, 32.0), 10, 10);
-    let texture_atlas_handle = texture_atlases.add(texture_atlas);
+    let texture_atlas_handle = load_texture_atlas(
+        "rogue_spritesheet_calciumtrice.png",
+        Vec2::new(32.0, 32.0),
+        10,
+        10,
+        asset_server,
+        texture_atlases,
+    );
+    let texture_atlas_ranges = SpriteSheetRanges {
+        curr_sprite: 0,
+        curr_range: 0,
+        ranges: vec![(0, 10), (10, 20), (20, 30), (30, 40), (40, 50)],
+    };
 
     commands
         .spawn()
@@ -28,6 +38,7 @@ pub fn spawn_player(
             },
             ..default()
         })
+        .insert(texture_atlas_ranges)
         .insert(RigidBody::Dynamic)
         .insert(LockedAxes::ROTATION_LOCKED)
         .insert(Velocity::zero())

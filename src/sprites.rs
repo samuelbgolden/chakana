@@ -20,31 +20,60 @@ pub fn load_sprites(
 
 pub fn handle_sprite_playback(
     time: Res<Time>,
-    texture_atlases: Res<Assets<TextureAtlas>>,
     mut player_query: Query<(
         &mut SpritePlaybackTimer,
         &mut TextureAtlasSprite,
-        &Handle<TextureAtlas>,
+        &mut SpriteSheetRanges,
         &Player,
     )>,
 ) {
-    // set player sprite
-    for (mut timer, mut sprite, texture_atlas_handle, player) in player_query.iter_mut() {
+    // handle player sprite
+    for (mut timer, mut sprite, mut ranges, player) in player_query.iter_mut() {
         timer.tick(time.delta());
         if timer.just_finished() {
-            let playback_length = 10;
-            sprite.index = sprite.index % playback_length;
+            // move to next sprite in the current animation (sprite range)
+            ranges.curr_sprite += 1;
 
-            match player.state {
-                PlayerState::TempB => sprite.index += playback_length * 0,
-                PlayerState::Idle => sprite.index += playback_length * 1,
-                PlayerState::Walking => sprite.index += playback_length * 2,
-                PlayerState::Jumping => sprite.index += playback_length * 3,
-                PlayerState::TempA => sprite.index += playback_length * 4,
+            // check if we need to wrap around to the start of the animation
+            if let Some((start, end)) = ranges.ranges.get(ranges.curr_range) {
+                if *end <= ranges.curr_sprite {
+                    ranges.curr_sprite = *start;
+                }
             }
-            //let texture_atlas = texture_atlases.get(texture_atlas_handle).unwrap();
-            //println!("Setting player texture to {}/{}", sprite.index, texture_atlas.textures.len());
-            sprite.index = sprite.index + 1;
+
+            // change the current animation if the player state has changed
+            let new_sprite_range: usize = match player.state {
+                PlayerState::TempB => 0,
+                PlayerState::Idle => 1,
+                PlayerState::Walking => 2,
+                PlayerState::Jumping => 3,
+                PlayerState::TempA => 4,
+            };
+            if new_sprite_range != ranges.curr_range {
+                if let Some((start, _)) = ranges.ranges.get(new_sprite_range) {
+                    ranges.curr_sprite = *start;
+                    ranges.curr_range = new_sprite_range;
+                } else {
+                    warn!("Invalid sprite range {} for player atlas", new_sprite_range);
+                }
+            }
+
+            // set the sprite
+            sprite.index = ranges.curr_sprite;
         }
     }
+}
+
+pub fn load_texture_atlas(
+    asset_path: &str,
+    tile_size: Vec2,
+    cols: usize,
+    rows: usize,
+    asset_server: Res<AssetServer>,
+    mut texture_atlases: ResMut<Assets<TextureAtlas>>,
+) -> Handle<TextureAtlas> {
+    let texture_handle = asset_server.load(asset_path);
+    let texture_atlas = TextureAtlas::from_grid(texture_handle, tile_size, cols, rows);
+    let texture_atlas_handle = texture_atlases.add(texture_atlas);
+    texture_atlas_handle
 }
