@@ -6,11 +6,12 @@ A video game inspired by elements Quechua/Inca culture.
 
 - [Pilgrimage of Qoyllur rit'i](https://pumadventuresperu.com/pilgrimage-to-qoyllur-riti-in-cusco-peru/)
 - construction of the chakana: starts as a solid diamond, 'find/construct' the 12 points of the chakana (as abilities or something). [good write up on the cultural symbolism](https://eaglecondoralliance.com/2021/02/13/andean-wisdom-the-chakana/#:~:text=Its%20shape%20is%20that%20of,pyramid%20lying%20on%20the%20ground.)
-- Concepts/words from Quechua that inspire: Apu (mountain deity), picchu (mountain), machu (old), chasquis (inca messengers), quipus (gifts/messages), Pachamama (earth mother), Ayni (reciprocity, community)
+- Concepts/words from Quechua that inspire: Apu (mountain deity), picchu (mountain), machu (old), chasquis (inca messengers), quipus (gifts/messages), Pachamama (earth mother), Ayni (reciprocity, community), guinea pigs
 - shapeshifting between the condor, puma, and snake
   - condor: flies / glides, affected by wind maybe, land on tree tops, midweight, heavens, guidance
   - puma: fast on the ground, cut trees, heavy, present life, power/strength
   - snake: slithers, can wrap around and jump from trees, light, underworld, wisdom/intelligence
+  - maybe status effects from the environment could be removed with a shapeshift, which could be a way to force the player to shift in a moment when they otherwise wouldn't want to
 
 ## Minimum Viable Game (living description)
 
@@ -34,15 +35,28 @@ Not an exhaustive list; to serve as a development guide / design doc
       - [x] jump
       - [x] momentum and velocity so its smoother
         - [ ] cap velocity at max
+      - [ ] add movement data-driven profile system that supports:
+        - [ ] jump gravity curves
+        - [ ] jump height
+        - [ ] multi-jump
+        - [ ] grounded speed
+        - [ ] acceleration from 0 to max speed
+        - [ ] turnaround speed
+        - [ ] fast falling (maybe just as a flat gravity multiplier)
+        - [ ] mapping states to sprite animations
+- [ ] respawn on zone leave
   - [x] create a player state which is accessible by multiple systems
   - [ ] player_input system should create a message of intent based on inputs
     - [ ] buffered input system, intents carry a time-to-live and apply once the character is in an appropriate state
 - [ ] global sprite sheet based animation system
   - [ ] add data file with details about each sprite sheet to be read
   - [x] create object for managing sprite ranges in texture atlases
-- [x] object collision system
-- [ ] environment
+- object collision system
+  - [ ] replace physics engine with controlled pseudo-physics system
+- environment
   - [x] solid unmoving flat ground
+  - [ ] general wall object
+  - [ ] general floor object
 - [ ] development tools
   - [ ] add an in-game toggle for the debug view
 

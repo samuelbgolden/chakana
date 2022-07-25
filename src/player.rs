@@ -42,7 +42,7 @@ pub fn spawn_player(
         .insert(RigidBody::Dynamic)
         .insert(LockedAxes::ROTATION_LOCKED)
         .insert(Velocity::zero())
-        .insert(Collider::capsule_y(25.0, 25.0))
+        .insert(Collider::capsule_y(20.0, 25.0))
         .insert(GravityScale(5.0))
         .insert(Player {
             state: PlayerState::Idle,

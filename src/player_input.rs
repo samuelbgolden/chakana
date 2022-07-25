@@ -1,7 +1,7 @@
 pub use crate::prelude::*;
 
 const APPLIED_VEL: f32 = 300.0;
-const JUMP_VEL: f32 = 235.0;
+const JUMP_VEL: f32 = 435.0;
 
 pub struct InputPollTimer(pub Timer);
 
@@ -9,10 +9,16 @@ pub fn handle_player_input(
     keyb_in: Res<Input<KeyCode>>,
     time: Res<Time>,
     mut timer: ResMut<InputPollTimer>,
-    mut query: Query<(&mut Velocity, &mut Player)>,
+    mut query: Query<(
+        &mut Velocity,
+        &mut Transform,
+        &mut GravityScale,
+        &mut Player,
+    )>,
 ) {
     if timer.0.tick(time.delta()).just_finished() {
-        let (mut player_vel, mut player) = query.iter_mut().nth(0).unwrap();
+        let (mut player_vel, mut player_trans, mut player_grav, mut player) =
+            query.iter_mut().nth(0).unwrap();
         let mut new_x_vel: f32 = 0.0;
         let mut new_y_vel: f32 = player_vel.linvel.y;
 
@@ -28,6 +34,12 @@ pub fn handle_player_input(
                 new_y_vel = JUMP_VEL;
             }
         }
+
+        // fast fall
+        if keyb_in.just_pressed(KeyCode::S) {
+            player_grav.0 *= 2.0;
+        }
+
         player_vel.linvel = Vec2::new(new_x_vel, new_y_vel);
 
         // changing animation (TEMPORARY)
@@ -45,6 +57,11 @@ pub fn handle_player_input(
         }
         if keyb_in.just_pressed(KeyCode::Key5) {
             player.state = PlayerState::TempA;
+        }
+
+        if keyb_in.just_pressed(KeyCode::R) {
+            player_trans.translation = Vec3::new(0.0, 0.0, 0.0);
+            player_grav.0 = 5.0;
         }
     }
 }
