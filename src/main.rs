@@ -17,6 +17,7 @@ mod prelude {
 
 #[allow(unused_imports)]
 use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
+use bevy::input::system::exit_on_esc_system;
 use prelude::*;
 
 fn setup(mut commands: Commands) {
@@ -46,9 +47,14 @@ fn main() {
         })
         .add_plugins(DefaultPlugins)
         .add_plugin(RapierPhysicsPlugin::<NoUserData>::pixels_per_meter(75.0))
-        .add_plugin(RapierDebugRenderPlugin::default())
+        .add_plugin({
+            let mut rdrp = RapierDebugRenderPlugin::default();
+            rdrp.depth_test = false;
+            rdrp
+        })
         //.add_plugin(FrameTimeDiagnosticsPlugin::default())
         //.add_plugin(LogDiagnosticsPlugin::default())
         .add_plugin(GamePlugin)
+        .add_system(exit_on_esc_system)
         .run();
 }

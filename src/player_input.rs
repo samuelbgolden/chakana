@@ -9,16 +9,17 @@ pub fn handle_player_input(
     keyb_in: Res<Input<KeyCode>>,
     time: Res<Time>,
     mut timer: ResMut<InputPollTimer>,
-    mut query: Query<(
+    mut query0: Query<(
         &mut Velocity,
         &mut Transform,
         &mut GravityScale,
         &mut Player,
     )>,
+    mut debug_context: ResMut<DebugRenderContext>,
 ) {
     if timer.0.tick(time.delta()).just_finished() {
         let (mut player_vel, mut player_trans, mut player_grav, mut player) =
-            query.iter_mut().nth(0).unwrap();
+            query0.iter_mut().nth(0).unwrap();
         let mut new_x_vel: f32 = 0.0;
         let mut new_y_vel: f32 = player_vel.linvel.y;
 
@@ -62,6 +63,11 @@ pub fn handle_player_input(
         if keyb_in.just_pressed(KeyCode::R) {
             player_trans.translation = Vec3::new(0.0, 0.0, 0.0);
             player_grav.0 = 5.0;
+        }
+
+        // dev shortcuts
+        if keyb_in.just_pressed(KeyCode::Slash) {
+            debug_context.enabled = !debug_context.enabled
         }
     }
 }

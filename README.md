@@ -27,15 +27,14 @@ A video game inspired by elements Quechua/Inca culture.
 
 Not an exhaustive list; to serve as a development guide / design doc
 
-- [ ] player
-  - [ ] base form
-    - [ ] movement
+- player
+  - base form
+    - movement
       - [ ] refactor to work based on messages
       - [x] walk to the sides
       - [x] jump
       - [x] momentum and velocity so its smoother
-        - [ ] cap velocity at max
-      - [ ] add movement data-driven profile system that supports:
+      - add movement data-driven profile system that supports:
         - [ ] jump gravity curves
         - [ ] jump height
         - [ ] multi-jump
@@ -57,8 +56,9 @@ Not an exhaustive list; to serve as a development guide / design doc
   - [x] solid unmoving flat ground
   - [ ] general wall object
   - [ ] general floor object
-- [ ] development tools
-  - [ ] add an in-game toggle for the debug view
+- development tools
+  - [x] add an in-game toggle for the debug view
+  - [x] add an in-game kill-window shortcut on ESC
 
 ## Credits
 
