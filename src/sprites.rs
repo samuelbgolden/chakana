@@ -1,22 +1,30 @@
 use crate::prelude::*;
+//use ron::de::from_reader;
+use serde::Deserialize;
+//use std::fs::File;
 
-/*
-pub fn load_sprites(
-    mut commands: Commands,
-    asset_server: Res<AssetServer>,
-    mut player_query: Query<Entity, With<Player>>,
-) {
-    let player_handle: TextureAtlas = TextureAtlas::from_grid(
-        asset_server.load("rogue_spritesheet_calciumtrice.png"),
-        Vec2::new(32.0, 32.0),
-        10,
-        10,
-    );
-    for player_entity in player_query.iter_mut() {
-        commands.entity(player_entity).insert(player_handle.han);
-    }
+#[derive(Clone, Deserialize, Debug)]
+pub struct SpriteSheetDataset {
+    pub dataset: Vec<SpriteSheetData>,
 }
-*/
+
+#[derive(Clone, Deserialize, Debug)]
+pub struct SpriteSheetData {
+    // name to be referenced when retrieving sheet
+    pub name: String,
+    // path to the original resource file relative to assets folder
+    pub filepath: String,
+    // intended playback fps for these animations
+    pub fps: f32,
+    // rows in the sheet
+    pub rows: i32,
+    // columns in the sheet
+    pub cols: i32,
+    // height of each sprite in pixels
+    pub height: i32,
+    // width of each sprite in pixels
+    pub width: i32,
+}
 
 pub fn handle_sprite_playback(
     time: Res<Time>,

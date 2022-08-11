@@ -50,6 +50,7 @@ Not an exhaustive list; to serve as a development guide / design doc
 - [ ] global sprite sheet based animation system
   - [ ] add data file with details about each sprite sheet to be read
   - [x] create object for managing sprite ranges in texture atlases
+  - [ ] move sprite atlas data to a RON file that loads on startup
 - object collision system
   - [ ] replace physics engine with controlled pseudo-physics system
 - environment

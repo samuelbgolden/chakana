@@ -8,6 +8,8 @@ edition = "2021"
 [dependencies]
 bevy = "0.7"
 bevy_rapier2d = { version = "*", features = ["parallel", "debug-render"] }
+ron = "*"
+serde = { version="1.0", features=["derive"] }
 
 [profile.dev]
 opt-level = 1
