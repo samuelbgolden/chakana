@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum PlayerState {
     Idle,
     Walking,
@@ -22,11 +22,6 @@ pub fn spawn_player(
         asset_server,
         texture_atlases,
     );
-    let texture_atlas_ranges = SpriteSheetRanges {
-        curr_sprite: 0,
-        curr_range: 0,
-        ranges: vec![(0, 10), (10, 20), (20, 30), (30, 40), (40, 50)],
-    };
 
     commands
         .spawn()
@@ -38,7 +33,6 @@ pub fn spawn_player(
             },
             ..default()
         })
-        .insert(texture_atlas_ranges)
         .insert(RigidBody::Dynamic)
         .insert(LockedAxes::ROTATION_LOCKED)
         .insert(Velocity::zero())

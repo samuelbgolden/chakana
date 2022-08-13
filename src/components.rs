@@ -5,12 +5,10 @@ pub struct Player {
     pub state: PlayerState,
 }
 
-#[derive(Component, Deref, DerefMut)]
+#[derive(Component, Deref, DerefMut, Debug)]
 pub struct SpritePlaybackTimer(pub Timer);
 
 #[derive(Component, Debug)]
-pub struct SpriteSheetRanges {
-    pub curr_sprite: usize,
-    pub curr_range: usize,
-    pub ranges: Vec<(usize, usize)>,
+pub struct ChangePlayerStateMessage {
+    pub new_state: PlayerState,
 }

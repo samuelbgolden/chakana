@@ -2,6 +2,7 @@ mod components;
 mod environment;
 mod player;
 mod player_input;
+mod player_state;
 mod sprites;
 
 mod prelude {
@@ -12,7 +13,7 @@ mod prelude {
     pub use crate::sprites::*;
     pub use bevy::prelude::*;
     pub use bevy_rapier2d::prelude::*;
-    pub use std::collections::HashMap;
+    pub use std::collections::BTreeMap;
 }
 
 #[allow(unused_imports)]
@@ -21,6 +22,10 @@ use bevy::input::system::exit_on_esc_system;
 use prelude::*;
 
 fn setup(mut commands: Commands) {
+    let ss_dataset = SpriteSheetDataset::load("assets/sprite_sheet_dataset.ron");
+    ss_dataset.print_dataset();
+    commands.insert_resource(ss_dataset);
+
     commands.spawn_bundle(OrthographicCameraBundle::new_2d());
 }
 

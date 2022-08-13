@@ -1,0 +1,20 @@
+SpriteSheetDataset(
+    dataset: {
+        "player_idle": SpriteSheetData(
+            filepath: "player_sprites/player_idle.png",
+            fps: 10.0,
+            rows: 1,
+            cols: 10,
+            height: 32,
+            width: 32,
+        ),
+        "player_walk": SpriteSheetData(
+            filepath: "player_sprites/player_walk.png",
+            fps: 10.0,
+            rows: 1,
+            cols: 10,
+            height: 32,
+            width: 32,
+        ),
+    },
+)
