@@ -31,6 +31,8 @@ fn setup(
         &asset_server,
         &mut texture_atlases,
     );
+    sprite_server.print_dataset();
+
     commands.insert_resource(sprite_server);
 
     commands.spawn_bundle(OrthographicCameraBundle::new_2d());

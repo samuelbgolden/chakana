@@ -16,6 +16,9 @@ pub enum PlaybackType {
     Repeat,
 }
 
+#[derive(Component, Deref, DerefMut, Debug)]
+pub struct SpritePlaybackTimer(pub Timer);
+
 #[derive(Component, Clone, Debug)]
 pub struct SpriteAnimation {
     pub playback: PlaybackType,

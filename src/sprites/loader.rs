@@ -9,7 +9,7 @@ pub struct SpriteSheetDataset {
 }
 
 pub struct SpriteServer {
-    pub sprite_map: HashMap<String, (Handle<TextureAtlas>, SpriteSheetMetadata)>,
+    sprite_map: HashMap<String, (Handle<TextureAtlas>, SpriteSheetMetadata)>,
 }
 
 #[derive(Clone, Deserialize, Debug)]
