@@ -1,20 +1,31 @@
 SpriteSheetDataset(
     dataset: {
-        "player_idle": SpriteSheetData(
-            filepath: "player_sprites/player_idle.png",
-            fps: 10.0,
+        "unknown": SpriteSheetMetadata(
+            filepath: "unknown_asset.png",
+            fps: 20.0,
             rows: 1,
-            cols: 10,
+            cols: 7,
             height: 32,
             width: 32,
+            direction: None,
         ),
-        "player_walk": SpriteSheetData(
-            filepath: "player_sprites/player_walk.png",
-            fps: 10.0,
+        "player_idle": SpriteSheetMetadata(
+            filepath: "player_sprites/player_idle.png",
+            fps: 20.0,
             rows: 1,
             cols: 10,
             height: 32,
             width: 32,
+            direction: Some(Right),
+        ),
+        "player_walk": SpriteSheetMetadata(
+            filepath: "player_sprites/player_walk.png",
+            fps: 20.0,
+            rows: 1,
+            cols: 10,
+            height: 32,
+            width: 32,
+            direction: Some(Right),
         ),
     },
 )

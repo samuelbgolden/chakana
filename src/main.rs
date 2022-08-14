@@ -13,7 +13,7 @@ mod prelude {
     pub use crate::sprites::*;
     pub use bevy::prelude::*;
     pub use bevy_rapier2d::prelude::*;
-    pub use std::collections::BTreeMap;
+    pub use std::collections::HashMap;
 }
 
 #[allow(unused_imports)]
@@ -21,10 +21,17 @@ use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
 use bevy::input::system::exit_on_esc_system;
 use prelude::*;
 
-fn setup(mut commands: Commands) {
-    let ss_dataset = SpriteSheetDataset::load("assets/sprite_sheet_dataset.ron");
-    ss_dataset.print_dataset();
-    commands.insert_resource(ss_dataset);
+fn setup(
+    mut commands: Commands,
+    asset_server: Res<AssetServer>,
+    mut texture_atlases: ResMut<Assets<TextureAtlas>>,
+) {
+    let sprite_server = SpriteServer::build_from_file(
+        "assets/sprite_sheet_dataset.ron",
+        &asset_server,
+        &mut texture_atlases,
+    );
+    commands.insert_resource(sprite_server);
 
     commands.spawn_bundle(OrthographicCameraBundle::new_2d());
 }
@@ -34,8 +41,8 @@ pub struct GamePlugin;
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
         app.add_startup_system(setup)
-            .add_startup_system(spawn_player)
             .add_startup_system(build_environment)
+            .add_startup_system_to_stage(StartupStage::PostStartup, spawn_player)
             .insert_resource(InputPollTimer(Timer::from_seconds(0.01, true)))
             .add_system(handle_player_input)
             .add_system(handle_sprite_playback);

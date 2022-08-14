@@ -5,28 +5,13 @@ pub enum PlayerState {
     Idle,
     Walking,
     Jumping,
-    TempA,
-    TempB,
 }
 
-pub fn spawn_player(
-    mut commands: Commands,
-    asset_server: Res<AssetServer>,
-    texture_atlases: ResMut<Assets<TextureAtlas>>,
-) {
-    let texture_atlas_handle = load_texture_atlas(
-        "rogue_spritesheet_calciumtrice.png",
-        Vec2::new(32.0, 32.0),
-        10,
-        10,
-        asset_server,
-        texture_atlases,
-    );
-
+pub fn spawn_player(mut commands: Commands, sprite_server: Res<SpriteServer>) {
     commands
         .spawn()
         .insert_bundle(SpriteSheetBundle {
-            texture_atlas: texture_atlas_handle,
+            texture_atlas: sprite_server.get_sprite_handle("player_idle").unwrap(),
             sprite: TextureAtlasSprite {
                 custom_size: Some(Vec2::new(100.0, 100.0)),
                 ..default()

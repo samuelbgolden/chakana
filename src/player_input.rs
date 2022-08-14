@@ -44,9 +44,6 @@ pub fn handle_player_input(
         player_vel.linvel = Vec2::new(new_x_vel, new_y_vel);
 
         // changing animation (TEMPORARY)
-        if keyb_in.just_pressed(KeyCode::Key1) {
-            player.state = PlayerState::TempB;
-        }
         if keyb_in.just_pressed(KeyCode::Key2) {
             player.state = PlayerState::Idle;
         }
@@ -55,9 +52,6 @@ pub fn handle_player_input(
         }
         if keyb_in.just_pressed(KeyCode::Key4) {
             player.state = PlayerState::Jumping;
-        }
-        if keyb_in.just_pressed(KeyCode::Key5) {
-            player.state = PlayerState::TempA;
         }
 
         if keyb_in.just_pressed(KeyCode::R) {
