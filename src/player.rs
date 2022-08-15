@@ -7,7 +7,11 @@ pub enum PlayerState {
     Jumping,
 }
 
-pub fn spawn_player(mut commands: Commands, sprite_server: Res<SpriteServer>) {
+pub fn spawn_player(
+    mut commands: Commands,
+    mut texture_atlases: ResMut<Assets<TextureAtlas>>,
+    sprite_server: Res<SpriteServer>,
+) {
     commands
         .spawn()
         .insert_bundle(SpriteSheetBundle {
@@ -18,6 +22,11 @@ pub fn spawn_player(mut commands: Commands, sprite_server: Res<SpriteServer>) {
             },
             ..default()
         })
+        .insert(
+            sprite_server
+                .get_sprite_anim("player_idle", PlaybackType::Repeat, &mut texture_atlases)
+                .unwrap(),
+        )
         .insert(RigidBody::Dynamic)
         .insert(LockedAxes::ROTATION_LOCKED)
         .insert(Velocity::zero())
@@ -25,6 +34,5 @@ pub fn spawn_player(mut commands: Commands, sprite_server: Res<SpriteServer>) {
         .insert(GravityScale(5.0))
         .insert(Player {
             state: PlayerState::Idle,
-        })
-        .insert(SpritePlaybackTimer(Timer::from_seconds(0.15, true)));
+        });
 }

@@ -63,15 +63,23 @@ impl SpriteServer {
     }
 
     /// Create SpriteAnimation from name associated with loaded metadata.
-    pub fn get_sprite_anim(&self, name: &str, playback: PlaybackType) -> Option<SpriteAnimation> {
+    pub fn get_sprite_anim(
+        &self,
+        name: &str,
+        playback: PlaybackType,
+        texture_atlases: &mut ResMut<Assets<TextureAtlas>>,
+    ) -> Option<SpriteAnimation> {
         if let Some((handle, metadata)) = self.sprite_map.get(name) {
+            let mut h = handle.clone();
+            h.make_strong(texture_atlases);
             Some(SpriteAnimation {
                 playback,
                 fps: metadata.fps,
                 index: 0,
                 length: metadata.rows * metadata.cols,
+                timer: Timer::from_seconds(1.0 / metadata.fps, true),
                 direction: metadata.direction.clone(),
-                handle: handle.clone(),
+                handle: h,
             })
         } else {
             None
