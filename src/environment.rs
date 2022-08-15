@@ -12,6 +12,5 @@ pub fn build_environment(mut commands: Commands, asset_server: Res<AssetServer>)
             texture: asset_server.load("minimal_grass_flat_platform.png"),
             ..default()
         })
-        .insert(RigidBody::Fixed)
         .insert(Collider::cuboid(500., 100.));
 }

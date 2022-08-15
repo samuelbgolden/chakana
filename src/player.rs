@@ -15,7 +15,7 @@ pub fn spawn_player(
     commands
         .spawn()
         .insert_bundle(SpriteSheetBundle {
-            texture_atlas: sprite_server.get_sprite_handle("player_badanim", &mut texture_atlases),
+            texture_atlas: sprite_server.get_sprite_handle("player_idle", &mut texture_atlases),
             sprite: TextureAtlasSprite {
                 custom_size: Some(Vec2::new(100.0, 100.0)),
                 ..default()
@@ -23,15 +23,13 @@ pub fn spawn_player(
             ..default()
         })
         .insert(sprite_server.get_sprite_anim(
-            "player_badanim",
+            "player_idle",
             PlaybackType::Repeat,
             &mut texture_atlases,
         ))
-        .insert(RigidBody::Dynamic)
-        .insert(LockedAxes::ROTATION_LOCKED)
-        .insert(Velocity::zero())
+        //.insert(Velocity::zero())
         .insert(Collider::capsule_y(20.0, 25.0))
-        .insert(GravityScale(5.0))
+        //.insert(GravityScale(5.0))
         .insert(Player {
             state: PlayerState::Idle,
         });

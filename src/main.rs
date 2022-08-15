@@ -1,5 +1,6 @@
 mod components;
 mod environment;
+mod physics;
 mod player;
 mod player_input;
 mod player_state;
@@ -8,11 +9,16 @@ mod sprites;
 mod prelude {
     pub use crate::components::*;
     pub use crate::environment::*;
+    pub use crate::physics::*;
     pub use crate::player::*;
     pub use crate::player_input::*;
     pub use crate::sprites::*;
     pub use bevy::prelude::*;
-    pub use bevy_rapier2d::prelude::*;
+    pub use bevy_rapier2d::geometry::*;
+    pub use bevy_rapier2d::math::*;
+    pub use bevy_rapier2d::pipeline::*;
+    pub use bevy_rapier2d::plugin::*;
+    pub use bevy_rapier2d::render::*;
     pub use std::collections::HashMap;
 }
 

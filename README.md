@@ -43,11 +43,11 @@ Not an exhaustive list; to serve as a development guide / design doc
         - [ ] turnaround speed
         - [ ] fast falling (maybe just as a flat gravity multiplier)
         - [ ] mapping states to sprite animations
-- [ ] respawn on zone leave
+  - [x] respawn on zone leave
   - [x] create a player state which is accessible by multiple systems
   - [ ] player_input system should create a message of intent based on inputs
     - [ ] buffered input system, intents carry a time-to-live and apply once the character is in an appropriate state
-- [ ] global sprite sheet based animation system
+- global sprite sheet based animation system
   - [x] add data file with details about each sprite sheet to be read
   - [x] create object for managing sprite ranges in texture atlases
   - [x] move sprite atlas data to a RON file that loads on startup
