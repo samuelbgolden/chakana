@@ -54,12 +54,21 @@ impl SpriteServer {
     }
 
     /// Get a strong handle to the texture atlas mapped to the given name.
-    pub fn get_sprite_handle(&self, name: &str) -> Option<Handle<TextureAtlas>> {
-        if let Some((handle, _)) = self.sprite_map.get(name) {
-            Some(handle.clone())
-        } else {
-            None
-        }
+    pub fn get_sprite_handle(
+        &self,
+        name: &str,
+        texture_atlases: &mut ResMut<Assets<TextureAtlas>>,
+    ) -> Handle<TextureAtlas> {
+        let (handle, _) = match self.sprite_map.get(name) {
+            Some(t) => t,
+            None => {
+                println!("UNKNOWN RESOURCE: '{}'", name);
+                self.sprite_map.get("unknown").unwrap()
+            }
+        };
+        let mut h = handle.clone();
+        h.make_strong(texture_atlases);
+        h
     }
 
     /// Create SpriteAnimation from name associated with loaded metadata.
@@ -68,21 +77,25 @@ impl SpriteServer {
         name: &str,
         playback: PlaybackType,
         texture_atlases: &mut ResMut<Assets<TextureAtlas>>,
-    ) -> Option<SpriteAnimation> {
-        if let Some((handle, metadata)) = self.sprite_map.get(name) {
-            let mut h = handle.clone();
-            h.make_strong(texture_atlases);
-            Some(SpriteAnimation {
-                playback,
-                fps: metadata.fps,
-                index: 0,
-                length: metadata.rows * metadata.cols,
-                timer: Timer::from_seconds(1.0 / metadata.fps, true),
-                direction: metadata.direction.clone(),
-                handle: h,
-            })
-        } else {
-            None
+    ) -> SpriteAnimation {
+        let (handle, metadata) = match self.sprite_map.get(name) {
+            Some(t) => t,
+            None => {
+                println!("UNKNOWN RESOURCE: '{}'", name);
+                self.sprite_map.get("unknown").unwrap()
+            }
+        };
+        let mut h = handle.clone();
+        h.make_strong(texture_atlases);
+        // build and return the animation component
+        SpriteAnimation {
+            playback,
+            fps: metadata.fps,
+            index: 0,
+            length: metadata.rows * metadata.cols,
+            timer: Timer::from_seconds(1.0 / metadata.fps, true),
+            direction: metadata.direction.clone(),
+            handle: h,
         }
     }
 
@@ -98,6 +111,7 @@ impl SpriteServer {
 }
 
 /// Loads texture atlas directly from a given file path.
+#[allow(dead_code)]
 pub fn load_texture_atlas(
     asset_path: &str,
     tile_size: Vec2,

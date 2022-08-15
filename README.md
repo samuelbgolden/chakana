@@ -51,8 +51,8 @@ Not an exhaustive list; to serve as a development guide / design doc
   - [x] add data file with details about each sprite sheet to be read
   - [x] create object for managing sprite ranges in texture atlases
   - [x] move sprite atlas data to a RON file that loads on startup
-    - [ ] make fps value in RON file accurate
-  - [ ] finish system for rendering any entity's texture when the entity has the SpriteAnimation component
+    - [x] make fps value in RON file accurate
+  - [x] finish system for rendering any entity's texture when the entity has the SpriteAnimation component
 - object collision system
   - [ ] replace physics engine with controlled pseudo-physics system
 - environment

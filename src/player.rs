@@ -15,18 +15,18 @@ pub fn spawn_player(
     commands
         .spawn()
         .insert_bundle(SpriteSheetBundle {
-            texture_atlas: sprite_server.get_sprite_handle("player_idle").unwrap(),
+            texture_atlas: sprite_server.get_sprite_handle("player_badanim", &mut texture_atlases),
             sprite: TextureAtlasSprite {
                 custom_size: Some(Vec2::new(100.0, 100.0)),
                 ..default()
             },
             ..default()
         })
-        .insert(
-            sprite_server
-                .get_sprite_anim("player_idle", PlaybackType::Repeat, &mut texture_atlases)
-                .unwrap(),
-        )
+        .insert(sprite_server.get_sprite_anim(
+            "player_badanim",
+            PlaybackType::Repeat,
+            &mut texture_atlases,
+        ))
         .insert(RigidBody::Dynamic)
         .insert(LockedAxes::ROTATION_LOCKED)
         .insert(Velocity::zero())
