@@ -12,6 +12,7 @@ A video game inspired by elements Quechua/Inca culture.
   - puma: fast on the ground, cut trees, heavy, present life, power/strength
   - snake: slithers, can wrap around and jump from trees, light, underworld, wisdom/intelligence
   - maybe status effects from the environment could be removed with a shapeshift, which could be a way to force the player to shift in a moment when they otherwise wouldn't want to
+  - each state has its own resources that are replenished by different things in the environment; I imagine one special environment that replenishes all of them
 
 ## Minimum Viable Game (living description)
 
@@ -39,7 +40,7 @@ Not an exhaustive list; to serve as a development guide / design doc
         - [ ] jump height
         - [ ] multi-jump
         - [ ] grounded speed
-        - [ ] acceleration from 0 to max speed
+        - [ ] acceleration curves for grounded movement (0 to max to 0)
         - [ ] turnaround speed
         - [ ] fast falling (maybe just as a flat gravity multiplier)
         - [ ] mapping states to sprite animations
@@ -53,8 +54,10 @@ Not an exhaustive list; to serve as a development guide / design doc
   - [x] move sprite atlas data to a RON file that loads on startup
     - [x] make fps value in RON file accurate
   - [x] finish system for rendering any entity's texture when the entity has the SpriteAnimation component
-- object collision system
-  - [ ] replace physics engine with controlled pseudo-physics system
+- physics
+  - [x] replace rapier movement physics with pseudo-physics system
+  - [ ] use rapier colliders to make platforms, walls, interactables
+  - [ ] lock physics changes to a timestep maybe? (https://gafferongames.com/post/integration_basics/)
 - environment
   - [x] solid unmoving flat ground
   - [ ] general wall object

@@ -27,9 +27,9 @@ pub fn spawn_player(
             PlaybackType::Repeat,
             &mut texture_atlases,
         ))
-        //.insert(Velocity::zero())
+        .insert(SemiImplicitEulerPhysics::zero())
+        .insert(GravityAffected::default())
         .insert(Collider::capsule_y(20.0, 25.0))
-        //.insert(GravityScale(5.0))
         .insert(Player {
             state: PlayerState::Idle,
         });

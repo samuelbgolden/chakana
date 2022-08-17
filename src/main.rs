@@ -53,6 +53,7 @@ impl Plugin for GamePlugin {
             .add_startup_system_to_stage(StartupStage::PostStartup, spawn_player)
             .insert_resource(InputPollTimer(Timer::from_seconds(0.01, true)))
             .add_system(handle_player_input)
+            .add_system(update_and_apply_physics)
             .add_system(handle_sprite_playback);
     }
 }
